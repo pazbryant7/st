@@ -2245,6 +2245,7 @@ xrdb_load(void)
 		}
 
 		XRESOURCE_LOAD_STRING("font", font);
+		XRESOURCE_LOAD_FLOAT("alpha", alpha);
 		XRESOURCE_LOAD_STRING("termname", termname);
 
 		XRESOURCE_LOAD_INTEGER("blinktimeout", blinktimeout);
