@@ -11,6 +11,11 @@ static char *font2[] = {
   "Noto Color Emoji:pixelsize=13.5:antialias=true:autohint=true",
 };
 
+/* disable bold, italic and roman fonts globally */
+int disablebold = 0;
+int disableroman = 1;
+int disableitalic = 1;
+
 static int borderpx = 0;
 
 static int max_bold_weight_infelicity = 20;
