@@ -11,7 +11,9 @@ static char *font2[] = {
   "Noto Color Emoji:pixelsize=13.5:antialias=true:autohint=true",
 };
 
-static int borderpx = 2;
+static int borderpx = 0;
+
+static int max_bold_weight_infelicity = 20;
 
 /*
  * What program is execed by st depends of these precedence rules:
