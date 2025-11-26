@@ -1279,12 +1279,11 @@ xinit(int cols, int rows)
 
 	usedfont = (opt_font == NULL)? font : opt_font;
 	xloadfonts(usedfont, 0);
+	/* spare fonts */
+	xloadsparefonts();
 
 	/* Backup default alpha value */
 	alpha_def = alpha;
-
-	/* spare fonts */
-	xloadsparefonts();
 
 	/* colors */
 	xw.cmap = XCreateColormap(xw.dpy, parent, xw.vis, None);
@@ -2297,6 +2296,7 @@ reload(int sig)
 	xloadcols();
 	xunloadfonts();
 	xloadfonts(font, 0);
+	xloadsparefonts();
 
 	/* pretend the window just got resized */
 	cresize(win.w, win.h);
