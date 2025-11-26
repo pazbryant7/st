@@ -5,14 +5,16 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
-/* Spare fonts */
+static char *font = "monospace:pixelsize=15.5:antialias=true:autohint=true";
+
 static char *font2[] = {
-/*	"Inconsolata for Powerline:pixelsize=12:antialias=true:autohint=true", */
-/*	"Hack Nerd Font Mono:pixelsize=11:antialias=true:autohint=true", */
+  "Symbols Nerd Font:pixelsize=15.5:antialias=true:autohint=true:style=Regular",
+  "Noto Color Emoji:pixelsize=15.5:antialias=true:autohint=true",
+  "Jua:pixelsize=15.5:antialias=true:autohint=true",
+  "Kosugi Maru:pixelsize=15.5:antialias=true:autohint=true"
 };
 
-static int borderpx = 2;
+static int borderpx = 0;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -22,7 +24,7 @@ static int borderpx = 2;
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
  */
-static char *shell = "/bin/sh";
+static char *shell = "/bin/env sh";
 char *utmp = NULL;
 /* scroll program: to enable use a string like "scroll" */
 char *scroll = NULL;
@@ -99,41 +101,40 @@ char *termname = "st-256color";
  */
 unsigned int tabspaces = 8;
 
-
-float alpha_def;
-
 /* bg opacity */
+float alpha_def;
 float alpha = 0.8;
 
 /* Terminal colors (16 first used in escape sequence) */
+/* Alacritty default color scheme (Tomorrow-Night) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-	"black",
-	"red3",
-	"green3",
-	"yellow3",
-	"blue2",
-	"magenta3",
-	"cyan3",
-	"gray90",
+	"#1d1f21", /* black   */
+	"#cc6666", /* red     */
+	"#b5bd68", /* green   */
+	"#f0c674", /* yellow  */
+	"#81a2be", /* blue    */
+	"#b294bb", /* magenta */
+	"#8abeb7", /* cyan    */
+	"#c5c8c6", /* white   */
 
 	/* 8 bright colors */
-	"gray50",
-	"red",
-	"green",
-	"yellow",
-	"#5c5cff",
-	"magenta",
-	"cyan",
-	"white",
+	"#666666", /* bright black   */
+	"#d54e53", /* bright red     */
+	"#b9ca4a", /* bright green   */
+	"#e7c547", /* bright yellow  */
+	"#7aa6da", /* bright blue    */
+	"#c397d8", /* bright magenta */
+	"#70c0b1", /* bright cyan    */
+	"#eaeaea", /* bright white   */
 
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#cccccc",
-	"#555555",
-	"gray90", /* default foreground colour */
-	"black", /* default background colour */
+	"#c5c8c6", /* default cursor */
+	"#1d1f21", /* default reverse cursor */
+	"#c5c8c6", /* default foreground colour */
+	"#1d1f21", /* default background colour */
 };
 
 
@@ -201,21 +202,17 @@ static MouseShortcut mshortcuts[] = {
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
-	{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
-	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
-	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
-	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
-	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
-	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
+	{ TERMMOD,              XK_plus,        zoom,           {.f = +1} },
+	{ ControlMask,          XK_minus,       zoom,           {.f = -1} },
+	{ ControlMask,          XK_exclam,      zoomreset,      {.f =  0} },
+
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
-	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
-	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ MODKEY,               XK_bracketleft, chgalpha,       {.f = -1} }, /* Decrease opacity */
-	{ MODKEY|ShiftMask,     XK_braceright,  chgalpha,       {.f = +1} }, /* Increase opacity */
-	{ MODKEY,               XK_bracketright,chgalpha,       {.f =  0} }, /* Reset opacity */
+
+	{ MODKEY,               XK_minus,       chgalpha,       {.f = -1} }, /* Decrease opacity */
+	{ MODKEY|ShiftMask,     XK_plus,        chgalpha,       {.f = +1} }  , /* Increase opacity */
+	{ MODKEY,               XK_exclam,      chgalpha,       {.f =  0} }, /* Reset opacity */
 };
 
 /*
