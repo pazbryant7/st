@@ -17,6 +17,11 @@ static char *font2[] = {
 static int borderpx = 0;
 static int max_bold_weight_infelicity = 20;
 
+/* disable bold, italic and roman fonts globally */
+int disablebold = 0;
+int disableitalic = 1;
+int disableroman = 1;
+
 /*
  * What program is execed by st depends of these precedence rules:
  * 1: program passed with -e
