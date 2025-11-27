@@ -5,16 +5,21 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "monospace:pixelsize=15.5:antialias=true:autohint=true";
+static char *fonts[] = {
+	"monospace:pixelsize=15.5:antialias=true:autohint=true:style:Medium",
+	"Annotation Mono:pixelsize=16.5:antialias=true:autohint=true:style:Medium",
+};
+
 
 static char *font2[] = {
-  "Symbols Nerd Font:pixelsize=15.5:antialias=true:autohint=true:style=Regular",
-  "Noto Color Emoji:pixelsize=15.5:antialias=true:autohint=true",
-  "Jua:pixelsize=15.5:antialias=true:autohint=true",
-  "Kosugi Maru:pixelsize=15.5:antialias=true:autohint=true"
+  "Symbols Nerd Font:pixelsize=15.5:antialias=true:autohint=true",
+  "Noto Color Emoji:pixelsize=15.5:antialias=true:autohint=true", /* fallback icons */
+  "Jua:pixelsize=15.5:antialias=true:autohint=true", /* Japanese font */
+  "Kosugi Maru:pixelsize=15.5:antialias=true:autohint=true" /* Chinese font */
 };
 
 static int borderpx = 0;
+static size_t currentfont = 0;
 static int max_bold_weight_infelicity = 20;
 
 /* disable bold, italic and roman fonts globally */
@@ -231,6 +236,8 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_minus,       chgalpha,       {.f = -1} }, /* Decrease opacity */
 	{ MODKEY|ShiftMask,     XK_plus,        chgalpha,       {.f = +1} }  , /* Increase opacity */
 	{ MODKEY,               XK_exclam,      chgalpha,       {.f =  0} }, /* Reset opacity */
+
+	{ TERMMOD,              XK_S,           cyclefonts,     {}        },
 };
 
 /*

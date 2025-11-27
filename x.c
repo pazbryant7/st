@@ -58,6 +58,7 @@ static void numlock(const Arg *);
 static void selpaste(const Arg *);
 static void zoom(const Arg *);
 static void zoomabs(const Arg *);
+static void cyclefonts(const Arg *);
 static void zoomreset(const Arg *);
 static void ttysend(const Arg *);
 static void chgalpha(const Arg *);
@@ -316,6 +317,8 @@ void
 zoomabs(const Arg *arg)
 {
 	xunloadfonts();
+
+	usedfont = fonts[currentfont];
 	xloadfonts(usedfont, arg->f);
 	xloadsparefonts();
 	cresize(0, 0);
@@ -327,17 +330,24 @@ void
 zoomreset(const Arg *arg)
 {
 	Arg larg;
-
-	if (defaultfontsize > 0) {
-		larg.f = defaultfontsize;
-		zoomabs(&larg);
-	}
+	zoomabs(&larg);
 }
 
 void
 ttysend(const Arg *arg)
 {
 	ttywrite(arg->s, strlen(arg->s), 1);
+}
+
+void
+cyclefonts(const Arg *arg)
+{
+	currentfont++;
+	currentfont %= (sizeof fonts / sizeof fonts[0]);
+	usedfont = fonts[currentfont];
+	Arg larg;
+	larg.f = usedfontsize;
+	zoomabs(&larg);
 }
 
 int
@@ -1285,7 +1295,7 @@ xinit(int cols, int rows)
 	if (!FcInit())
 		die("could not init fontconfig.\n");
 
-	usedfont = (opt_font == NULL)? font : opt_font;
+	usedfont = (opt_font == NULL)? fonts[currentfont] : opt_font;
 	xloadfonts(usedfont, 0);
 	/* spare fonts */
 	xloadsparefonts();
@@ -2276,9 +2286,9 @@ xrdb_load(void)
 		  defaultrcs = defaultbg;
 		}
 
-		XRESOURCE_LOAD_STRING("font", font);
 		XRESOURCE_LOAD_FLOAT("alpha", alpha);
 		XRESOURCE_LOAD_STRING("termname", termname);
+		XRESOURCE_LOAD_INTEGER("currentfont", currentfont);
 
 		XRESOURCE_LOAD_INTEGER("blinktimeout", blinktimeout);
 		XRESOURCE_LOAD_INTEGER("bellvolume", bellvolume);
@@ -2299,7 +2309,8 @@ reload(int sig)
 	/* colors, fonts */
 	xloadcols();
 	xunloadfonts();
-	xloadfonts(font, 0);
+	usedfont = (opt_font == NULL)? fonts[currentfont] : opt_font;
+	xloadfonts(usedfont, 0);
 	xloadsparefonts();
 
 	/* pretend the window just got resized */
