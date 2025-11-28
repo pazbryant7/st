@@ -7,8 +7,8 @@
  */
 static char *fonts[] = {
 	"monospace:pixelsize=15.5:antialias=true:autohint=true:style:Medium",
-	"Maple Mono NL:pixelsize=16.5:antialias=true:autohint=true:style:Medium",
-	"Annotation Mono:pixelsize=16.5:antialias=true:autohint=true:style:Medium",
+	"Maple Mono Normal NL:pixelsize=16.5:antialias=true:autohint=true:style:Medium",
+	"Annotation Mono:pixelsize=16.5:antialias=true:autohint=true:style:DemiBold",
 };
 
 
