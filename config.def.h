@@ -5,7 +5,13 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+static char *font = "Annotation Mono:pixelsize=16.5:antialias=true:autohint=true:style:DemiBold";
+/* Spare fonts */
+static char *font2[] = {
+  "Symbols Nerd Font:pixelsize=15.5:antialias=true:autohint=true",
+  "Noto Color Emoji:pixelsize=15.5:antialias=true:autohint=true",
+};
+
 static int borderpx = 2;
 
 /*
