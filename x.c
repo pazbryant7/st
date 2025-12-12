@@ -321,11 +321,7 @@ void
 zoomreset(const Arg *arg)
 {
 	Arg larg;
-
-	if (defaultfontsize > 0) {
-		larg.f = defaultfontsize;
-		zoomabs(&larg);
-	}
+  zoomabs(&larg);
 }
 
 void
@@ -2258,16 +2254,11 @@ reload(int sig)
 {
 	xrdb_load();
 
-	/* colors, fonts */
 	xloadcols();
-	xunloadfonts();
-	xloadfonts(font, 0);
-	xloadsparefonts();
-
-	/* pretend the window just got resized */
-	cresize(win.w, win.h);
-
-	redraw();
+  usedfont = font;
+  Arg larg;
+  larg.f = usedfontsize;
+  zoomabs(&larg);
 
 	/* triggers re-render if we're visible. */
 	ttywrite("\033[O", 3, 1);
