@@ -5,7 +5,12 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Annotation Mono:pixelsize=16.5:antialias=true:autohint=true:style:DemiBold";
+static char *fonts[] = {
+	"Annotation Mono:pixelsize=14.5:style:DemiBold:antialias=true:autohint=true",
+	"Annotation Mono:pixelsize=14.5:style:Bold:antialias=true:autohint=true",
+};
+
+static size_t currentfont = 0;
 /* Spare fonts */
 static char *font2[] = {
   "Symbols Nerd Font:pixelsize=15.5:antialias=true:autohint=true",
@@ -216,6 +221,7 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_plus,        zoom,           {.f = +1} },
 	{ ControlMask,          XK_minus,       zoom,           {.f = -1} },
 	{ ControlMask,          XK_exclam,      zoomreset,      {.f =  0} },
+	{ TERMMOD,              XK_S,           cyclefonts,     {}        },
 };
 
 /*
