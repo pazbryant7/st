@@ -60,6 +60,7 @@ static void zoom(const Arg *);
 static void zoomabs(const Arg *);
 static void zoomreset(const Arg *);
 static void ttysend(const Arg *);
+static void cyclefonts(const Arg *);
 
 /* config.h for applying patches and the configuration. */
 #include "config.h"
@@ -310,6 +311,7 @@ void
 zoomabs(const Arg *arg)
 {
 	xunloadfonts();
+	usedfont = (opt_font == NULL)? fonts[currentfont] : opt_font;
 	xloadfonts(usedfont, arg->f);
 	xloadsparefonts();
 	cresize(0, 0);
@@ -328,6 +330,17 @@ void
 ttysend(const Arg *arg)
 {
 	ttywrite(arg->s, strlen(arg->s), 1);
+}
+
+void
+cyclefonts(const Arg *arg)
+{
+	currentfont++;
+	currentfont %= (sizeof fonts / sizeof fonts[0]);
+	usedfont = fonts[currentfont];
+	Arg larg;
+	larg.f = usedfontsize;
+	zoomabs(&larg);
 }
 
 int
@@ -1268,7 +1281,7 @@ xinit(int cols, int rows)
 	if (!FcInit())
 		die("could not init fontconfig.\n");
 
-	usedfont = (opt_font == NULL)? font : opt_font;
+	usedfont = (opt_font == NULL)? fonts[currentfont] : opt_font;
 	xloadfonts(usedfont, 0);
 
 	/* spare fonts */
@@ -2236,9 +2249,9 @@ xrdb_load(void)
 		  defaultrcs = defaultbg;
 		}
 
-		XRESOURCE_LOAD_STRING("font", font);
 		XRESOURCE_LOAD_FLOAT("alpha", alpha);
 		XRESOURCE_LOAD_STRING("termname", termname);
+		XRESOURCE_LOAD_INTEGER("currentfont", currentfont);
 
 		XRESOURCE_LOAD_INTEGER("blinktimeout", blinktimeout);
 		XRESOURCE_LOAD_INTEGER("bellvolume", bellvolume);
@@ -2255,9 +2268,8 @@ void
 reload(int sig)
 {
 	xrdb_load();
-
 	xloadcols();
-  usedfont = font;
+
   Arg larg;
   larg.f = usedfontsize;
   zoomabs(&larg);
