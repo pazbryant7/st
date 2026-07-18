@@ -5,7 +5,11 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+static char *fonts[] = {
+	"Liberation Mono:pixelsize=12:antialias=true:autohint=true",
+	"Gohu GohuFont:pixelsize=11:antialias=false:autohint=false",
+};
+static size_t currentfont = 0;
 /* Spare fonts */
 static char *font2[] = {
 /*	"Inconsolata for Powerline:pixelsize=12:antialias=true:autohint=true", */
@@ -219,6 +223,7 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
+	{ TERMMOD,              XK_S,           cyclefonts,     {}        },
 };
 
 /*
