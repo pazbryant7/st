@@ -6,15 +6,24 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *fonts[] = {
-    "Liberation Mono:pixelsize=12:antialias=true:autohint=true",
-    "Gohu GohuFont:pixelsize=11:antialias=false:autohint=false",
+    "Annotation Mono:pixelsize=16.5:style:Medium:antialias=true:autohint=true",
+    "Annotation Mono:pixelsize=16.5:style:DemiBold:antialias=true:autohint=true",
+    "Annotation Mono:pixelsize=16.5:style:Bold:antialias=true:autohint=true",
+    "Annotation Mono:pixelsize=16.5:style:ExtraBold:antialias=true:autohint=true",
+    "Recursive Mn Csl St:pixelsize=16.5:style:Regular:antialias=true:autohint=true",
+    "Recursive Mn Csl St Med:pixelsize=16.5:style:Medium:antialias=true:autohint=true",
+    "Recursive Mn Csl St SmB:pixelsize=16.5:style:SemiBold:antialias=true:autohint=true",
+    "Recursive Mn Csl St:pixelsize=16.5:style:Bold:antialias=true:autohint=true",
 };
 static size_t currentfont = 0;
 /* Spare fonts */
 static char *font2[] = {
-    /*	"Inconsolata for Powerline:pixelsize=12:antialias=true:autohint=true",
-     */
-    /*	"Hack Nerd Font Mono:pixelsize=11:antialias=true:autohint=true", */
+    "Symbols Nerd Font:pixelsize=15.5:style:Regular:antialias=true:autohint=true",
+    "Noto Color Emoji:pixelsize=15.5:style:Regular:antialias=true:autohint=true",
+    "Noto Sans CJK JP:pixelsize=15.5:style:Medium:antialias=true:autohint=true",
+    "Noto Sans CJK SC:pixelsize=15.5:style:Medium:antialias=true:autohint=true",
+    "Noto Sans CJK TC:pixelsize=15.5:style:Medium:antialias=true:autohint=true",
+    "Noto Sans CJK KR:pixelsize=15.5:style:Medium:antialias=true:autohint=true",
 };
 
 static int borderpx = 2;
