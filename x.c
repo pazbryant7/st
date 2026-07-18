@@ -2225,7 +2225,6 @@ xrdb_load(void)
 		  defaultrcs = defaultbg;
 		}
 
-		XRESOURCE_LOAD_STRING("font", font);
 		XRESOURCE_LOAD_STRING("termname", termname);
 
 		XRESOURCE_LOAD_INTEGER("blinktimeout", blinktimeout);
@@ -2247,7 +2246,8 @@ reload(int sig)
 	/* colors, fonts */
 	xloadcols();
 	xunloadfonts();
-	xloadfonts(font, 0);
+    xloadfonts(usedfont, 0);
+    xloadsparefonts();
 
 	/* pretend the window just got resized */
 	cresize(win.w, win.h);
