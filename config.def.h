@@ -14,6 +14,7 @@ static char *fonts[] = {
     "Recursive Mn Csl St Med:pixelsize=16.5:style:Medium:antialias=true:autohint=true",
     "Recursive Mn Csl St SmB:pixelsize=16.5:style:SemiBold:antialias=true:autohint=true",
     "Recursive Mn Csl St:pixelsize=16.5:style:Bold:antialias=true:autohint=true",
+    "IBM 3270:pixelsize=16.5:style:Regular:antialias=true:autohint=true",
 };
 static size_t currentfont = 0;
 /* Spare fonts */
