@@ -90,6 +90,7 @@ void redraw(void);
 void draw(void);
 
 int tattrset(int);
+int tisaltscr(void);
 void tnew(int, int);
 void tresize(int, int);
 void tsetdirtattr(int);
