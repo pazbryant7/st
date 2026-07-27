@@ -1284,7 +1284,7 @@ xinit(int cols, int rows)
 	if (!FcInit())
 		die("could not init fontconfig.\n");
 
-	usedfont = (opt_font == NULL)? fonts[currentfont] : opt_font;
+	usedfont = fonts[currentfont];
 	xloadfonts(usedfont, 0);
 
 	/* spare fonts */
