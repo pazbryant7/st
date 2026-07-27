@@ -19,6 +19,7 @@
           packages = with pkgs; [
             clang-tools
             patch
+            just
           ];
         };
         formatter = pkgs.nixfmt-tree;
