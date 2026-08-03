@@ -61,6 +61,7 @@ static void zoom(const Arg *);
 static void zoomabs(const Arg *);
 static void zoomreset(const Arg *);
 static void ttysend(const Arg *);
+static void togglealpha(const Arg *);
 void kscrollup(const Arg *);
 void kscrolldown(const Arg *);
 static void cyclefonts(const Arg *);
@@ -1287,6 +1288,8 @@ xinit(int cols, int rows)
 	usedfont = fonts[currentfont];
 	xloadfonts(usedfont, 0);
 
+    alpha_def = alpha;
+
 	/* spare fonts */
 	xloadsparefonts();
 
@@ -1519,6 +1522,18 @@ xmakeglyphfontspecs(XftGlyphFontSpec *specs, const Glyph *glyphs, int len, int x
 	}
 
 	return numspecs;
+}
+
+void togglealpha(const Arg *arg) {
+    if (alpha == 1.0f)
+        alpha = alpha_def;
+    else
+        alpha = 1.0f;
+
+    dc.col[defaultbg].color.alpha = (unsigned short)(0xFFFF * alpha);
+    /* Required to remove artifacting from borderpx */
+    cresize(0, 0);
+    redraw();
 }
 
 void
