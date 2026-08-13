@@ -10,7 +10,6 @@ static char *fonts[] = {
     "Annotation Mono:pixelsize=16.5:style:DemiBold:antialias=true:autohint=true",
     "Annotation Mono:pixelsize=16.5:style:Bold:antialias=true:autohint=true",
     "Annotation Mono:pixelsize=16.5:style:ExtraBold:antialias=true:autohint=true",
-    "Recursive Mn Csl St:pixelsize=16.5:style:Regular:antialias=true:autohint=true",
     "Recursive Mn Csl St Med:pixelsize=16.5:style:Medium:antialias=true:autohint=true",
     "Recursive Mn Csl St SmB:pixelsize=16.5:style:SemiBold:antialias=true:autohint=true",
     "Recursive Mn Csl St:pixelsize=16.5:style:Bold:antialias=true:autohint=true",
